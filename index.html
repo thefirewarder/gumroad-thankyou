@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You!</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11533110779"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11533110779');
+  </script>
+</head>
+<body>
+  <h1>Thanks for your purchase!</h1>
+  <p>Your transaction was successful.</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const transactionId = params.get('transaction_id');
+    const priceCents = parseFloat(params.get('price')) || 0;
+    const currency = params.get('currency') || 'USD';
+    const price = priceCents / 100;
+
+    if (transactionId) {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-11533110779/YOUR_LABEL_HERE',
+        'value': price,
+        'currency': currency,
+        'transaction_id': transactionId
+      });
+    }
+  </script>
+</body>
+</html>
