@@ -3,33 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Thank You!</title>
+  
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11533110779"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'AW-11533110779');
   </script>
 </head>
+
 <body>
   <h1>Thanks for your purchase!</h1>
   <p>Your transaction was successful.</p>
 
+  <!-- Google Ads Conversion Event -->
   <script>
     const params = new URLSearchParams(window.location.search);
-    const transactionId = params.get('transaction_id');
+    const transactionId = params.get('transaction_id') || 'test-txn';
     const priceCents = parseFloat(params.get('price')) || 0;
     const currency = params.get('currency') || 'USD';
     const price = priceCents / 100;
 
-    if (transactionId) {
+    // Delay to ensure gtag is ready
+    setTimeout(() => {
       gtag('event', 'conversion', {
         'send_to': 'AW-11533110779/YOUR_LABEL_HERE',
         'value': price,
         'currency': currency,
         'transaction_id': transactionId
       });
-    }
+    }, 300);
   </script>
 </body>
 </html>
